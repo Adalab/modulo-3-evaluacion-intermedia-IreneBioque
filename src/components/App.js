@@ -5,6 +5,7 @@ import data from './data.json';
 function App() {
   const [clubs, setClubs] = useState(data);
   const [search, setSearch] = useState('all');
+  // const [deleted, setDeleted] = useState('');
   const [newClub, setNewClub] = useState({
     name: '',
     openOnWeekdays: '',
@@ -27,6 +28,7 @@ function App() {
             <p>Nombre: {club.name}</p>
             <p>Abierto entre semana: {club.openOnWeekdays ? 'Si' : 'No'}</p>
             <p>Abierto el fin de semana: {club.openOnWeekend ? 'Si' : 'No'}</p>
+            <i class='far fa-times-circle' onClick={handleDelete}></i>
           </li>
         );
       });
@@ -64,18 +66,21 @@ function App() {
     setSearch(ev.target.value);
     console.log(search);
   };
+  const handleDelete = (ev) => {
+    console.log(ev.currentTarget.id);
+  };
   return (
     <div>
-      <header>
-        <h1>Mis clubs</h1>
-        <select onChange={handleSearch}>
+      <header className='header'>
+        <h1 className='header__title'>Mis clubs</h1>
+        <select className='header__select' onChange={handleSearch}>
           <option value='all'>todos</option>
           <option value='midweek'>los que abren entre semana</option>
           <option value='weekend'>los que abren el fin de semana</option>
         </select>
       </header>
-      <main>
-        <ul>{renderClubs()}</ul>
+      <main className='main'>
+        <ul className='listclub'>{renderClubs()}</ul>
         <form className='form'>
           <h2>Añadir un nuevo club</h2>
           <label>
