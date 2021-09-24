@@ -68,6 +68,8 @@ function App() {
   };
   const handleDelete = (ev) => {
     console.log(ev.currentTarget.id);
+    if (ev.currentTarget.id === clubs.id) {
+    }
   };
   return (
     <div>
