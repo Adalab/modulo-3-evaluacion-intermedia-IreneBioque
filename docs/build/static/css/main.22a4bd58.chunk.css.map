@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/styles/App.scss"],"names":[],"mappings":"AAAA,MACE,YAAa,CACb,qBAAsB,CACvB,QAEC,WAAY,CACZ,aAAc","file":"main.22a4bd58.chunk.css","sourcesContent":[".form {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n.button {\r\n  width: 150px;\r\n  margin: 10px 0;\r\n}\r\n"]}
