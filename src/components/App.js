@@ -24,7 +24,7 @@ function App() {
       })
       .map((club, i) => {
         return (
-          <li key={i} id={i}>
+          <li className='listclub__li' key={i} id={i}>
             <p>Nombre: {club.name}</p>
             <p>Abierto entre semana: {club.openOnWeekdays ? 'Si' : 'No'}</p>
             <p>Abierto el fin de semana: {club.openOnWeekend ? 'Si' : 'No'}</p>

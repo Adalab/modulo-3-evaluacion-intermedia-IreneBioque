@@ -4,7 +4,13 @@
 
 .listclub {
   display: flex;
+  justify-content: space-between;
   padding: 10px;
+  &__li {
+    padding: 5px;
+    border: solid 2px lightcoral;
+    border-radius: 10px;
+  }
 }
 
 .form {
@@ -14,4 +20,7 @@
 .button {
   width: 150px;
   margin: 10px 0;
+  background-color: lightcoral;
+  border: solid 2px lightcoral;
+  border-radius: 5px;
 }
