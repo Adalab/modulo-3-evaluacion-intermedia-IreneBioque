@@ -6,11 +6,10 @@ function App() {
   const [clubs, setClubs] = useState(data);
   const [search, setSearch] = useState('all');
   // const [deleted, setDeleted] = useState('');
-  const [newClub, setNewClub] = useState({
-    name: '',
-    openOnWeekdays: '',
-    openOnWeekend: '',
-  });
+  const [name, setName] = useState('');
+  const [openOnWeekdays, setOpenOnWeekdays] = useState(false);
+  const [openOnWeekend, setOpenOnWeekend] = useState(false);
+
   const renderClubs = () => {
     return clubs
       .filter((club) => {
@@ -28,49 +27,45 @@ function App() {
             <p>Nombre: {club.name}</p>
             <p>Abierto entre semana: {club.openOnWeekdays ? 'Si' : 'No'}</p>
             <p>Abierto el fin de semana: {club.openOnWeekend ? 'Si' : 'No'}</p>
-            <i class='far fa-times-circle' onClick={handleDelete}></i>
+            <i
+              className='far fa-times-circle'
+              onClick={handleDelete}
+              id={i}
+            ></i>
           </li>
         );
       });
   };
-  const handleAddClubs = (ev) => {
-    if (ev.currentTarget.id === 'name') {
-      setNewClub({ ...newClub, name: ev.currentTarget.value });
-    } else if (
-      ev.currentTarget.id === 'midweek' &&
-      ev.currentTarget.checked === true
-    ) {
-      setNewClub({ ...newClub, openOnWeekdays: true });
-    } else if (
-      ev.currentTarget.id === 'midweek' &&
-      ev.currentTarget.checked === false
-    ) {
-      setNewClub({ ...newClub, openOnWeekdays: false });
-    } else if (
-      ev.currentTarget.id === 'weekend' &&
-      ev.currentTarget.checked === true
-    ) {
-      setNewClub({ ...newClub, openOnWeekend: true });
-    } else if (
-      ev.currentTarget.id === 'weekend' &&
-      ev.currentTarget.checked === false
-    ) {
-      setNewClub({ ...newClub, openOnWeekend: false });
-    }
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
+  const handleOpenWeekdays = (e) => {
+    setOpenOnWeekdays(e.target.checked);
+  };
+  const handleOpenOnWeekend = (e) => {
+    setOpenOnWeekend(e.target.checked);
   };
   const handleClick = (ev) => {
     ev.preventDefault();
-    setClubs([...clubs, newClub]);
+    clubs.push({
+      name: name,
+      openOnWeekdays: openOnWeekdays,
+      openOnWeekend: openOnWeekend,
+    });
+    setClubs([...clubs]);
   };
   const handleSearch = (ev) => {
     setSearch(ev.target.value);
     console.log(search);
   };
   const handleDelete = (ev) => {
-    console.log(ev.currentTarget.id);
-    if (ev.currentTarget.id === clubs.id) {
+    const id = ev.currentTarget.parentElement.id;
+    if (id === ev.currentTarget.id) {
+      clubs.splice(id, 1);
+      setClubs([...clubs]);
     }
   };
+
   return (
     <div>
       <header className='header'>
@@ -87,17 +82,30 @@ function App() {
           <h2>Añadir un nuevo club</h2>
           <label>
             Nombre del club{' '}
-            <input type='text' onChange={handleAddClubs} id='name' />
+            <input type='text' onChange={handleName} id='name' />
           </label>
           <label>
             ¿Abre entre semana?{' '}
-            <input type='checkbox' onChange={handleAddClubs} id='midweek' />
+            <input
+              type='checkbox'
+              onChange={handleOpenWeekdays}
+              id='midweek'
+              checked={openOnWeekdays}
+            />
           </label>
           <label>
             ¿Abre los fines semana?{' '}
-            <input type='checkbox' onChange={handleAddClubs} id='weekend' />
+            <input
+              type='checkbox'
+              onChange={handleOpenOnWeekend}
+              id='weekend'
+            />
           </label>
-          <button className='button' onClick={handleClick}>
+          <button
+            className='button'
+            onClick={handleClick}
+            checked={openOnWeekend}
+          >
             Añadir un nuevo club
           </button>
         </form>
